@@ -4,40 +4,138 @@
   <title>Kartik Singh | DevOps Engineer</title>
 
   <style>
-    body {
-      font-family: Arial;
-      background: #0f172a;
-      color: #e2e8f0;
-      text-align: center;
-      margin-top: 80px;
-    }
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background 0.3s, color 0.3s;
+  }
 
-    h1 { color: #38bdf8; }
-    h2 { color: #94a3b8; }
+  /* DARK MODE (default) */
+  body.dark {
+    background: #0f172a;
+    color: #e2e8f0;
+  }
 
-    section {
-      margin: 30px;
-    }
+  /* LIGHT MODE */
+  body.light {
+    background: #f1f5f9;
+    color: #0f172a;
+  }
+
+  h1 { color: #38bdf8; }
+  h2 { color: #94a3b8; }
+
+  section {
+    margin: 40px auto;
+    padding: 25px;
+    width: 60%;
+    border-radius: 12px;
+    transition: background 0.3s;
+  }
+
+  body.dark section {
+    background: #1e293b;
+  }
+
+  body.light section {
+    background: #ffffff;
+  }
+
+  .project {
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  body.dark .project {
+    background: #0f172a;
+  }
+
+  body.light .project {
+    background: #e2e8f0;
+  }
+
+  a {
+    color: #38bdf8;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .toggle-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  body.dark .toggle-btn {
+    background: #38bdf8;
+    color: black;
+  }
+
+  body.light .toggle-btn {
+    background: #0f172a;
+    color: white;
+  }
   </style>
 
 </head>
-<body style="font-family: Arial; text-align: center; margin-top: 80px;">
 
-  <h1>Kartik Singh</h1>
-  <h2>DevOps Engineer</h2>
+<body>
+  <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
 
-  <p>I build scalable, secure cloud infrastructure using AWS, Kubernetes & CI/CD</p>
+  <section>
+    <h1>Kartik Singh</h1>
+    <h2>DevOps Engineer</h2>
+    <p>I build scalable, secure cloud infrastructure using AWS, Kubernetes & CI/CD</p>
+  </section>
 
+  <section>
   <h3>🚀 Projects</h3>
-  <p>🔹 ShivaShell – Linux automation toolkit</p>
-  <p>🔹 AWS EKS CI/CD Pipeline</p>
-  <p>🔹 Terraform Infrastructure Setup</p>
 
-  <h3>🛠 Skills</h3>
-  <p>AWS | Docker | Kubernetes | Terraform | Jenkins | GitHub Actions</p>
+  <div class="project">
+    <b>ShivaShell</b><br>
+    Linux automation toolkit <br>
+    <a href="https://github.com/KartikSingh970/ShivaShell" target="_blank">View Project</a>
+  </div>
 
-  <h3>📬 Contact : 7399936655</h3>
-  <p>Email: kartik970singh@gmail.com</p>
+  <div class="project">
+    <b>CabOps</b><br>
+    EKS CI/CD pipeline with Docker, ECR, Terraform <br>
+    <a href="https://github.com/KartikSingh970/CabOps-DevSecOps-project" target="_blank">View Project</a>
+  </div>
 
+  </section>
+
+  <section>
+    <h3>🛠 Skills</h3>
+    <p>AWS | Docker | Kubernetes | Terraform | Jenkins | GitHub Actions</p>
+  </section>
+
+  <section>
+    <h3>📬 Contact: 7399936655</h3>
+    <p>Email: kartik970singh@gmail.com</p>
+    <p>GitHub: https://github.com/KartikSingh970</p>
+  </section>
+
+  <script>
+    // default theme
+    document.body.classList.add("dark");
+
+    function toggleTheme() {
+      if (document.body.classList.contains("dark")) {
+        document.body.classList.remove("dark");
+        document.body.classList.add("light");
+      } else {
+        document.body.classList.remove("light");
+        document.body.classList.add("dark");
+      }
+    }
+  </script>
 </body>
 </html>
