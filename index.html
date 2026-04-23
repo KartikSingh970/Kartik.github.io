@@ -1,141 +1,279 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" data-theme="dark">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kartik Singh | DevOps Engineer</title>
-
   <style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    transition: background 0.3s, color 0.3s;
-  }
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --card: #0f172a;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent2: #818cf8;
+      --border: rgba(148,163,184,0.15);
+      --toggle-bg: #38bdf8;
+      --toggle-color: #0f172a;
+      --tag-bg: rgba(56,189,248,0.12);
+      --tag-color: #38bdf8;
+    }
+    [data-theme="light"] {
+      --bg: #f1f5f9;
+      --surface: #ffffff;
+      --card: #f1f5f9;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #0284c7;
+      --accent2: #4f46e5;
+      --border: rgba(15,23,42,0.1);
+      --toggle-bg: #0f172a;
+      --toggle-color: #ffffff;
+      --tag-bg: rgba(2,132,199,0.1);
+      --tag-color: #0284c7;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, sans-serif;
+      transition: background 0.3s, color 0.3s;
+      min-height: 100vh;
+    }
+    .toggle {
+      position: fixed; top: 16px; right: 16px; z-index: 100;
+      background: var(--toggle-bg); color: var(--toggle-color);
+      border: none; border-radius: 20px; padding: 8px 16px;
+      font-size: 13px; font-weight: 500; cursor: pointer;
+      transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+    }
+    .toggle:hover { opacity: 0.85; }
+    .wrapper { max-width: 740px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
 
-  /* DARK MODE (default) */
-  body.dark {
-    background: #0f172a;
-    color: #e2e8f0;
-  }
+    /* HERO */
+    .hero {
+      background: var(--surface); border-radius: 16px;
+      border: 0.5px solid var(--border);
+      padding: 2.5rem 2rem; margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+    }
+    .avatar {
+      width: 72px; height: 72px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; font-weight: 500; color: #fff; letter-spacing: -1px;
+    }
+    .hero-text h1 { font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
+    .hero-text h2 { font-size: 15px; font-weight: 400; color: var(--muted); margin-bottom: 10px; }
+    .hero-text p { font-size: 14px; color: var(--muted); line-height: 1.6; max-width: 420px; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .badge {
+      background: var(--tag-bg); color: var(--tag-color);
+      font-size: 12px; font-weight: 500; padding: 4px 10px;
+      border-radius: 20px; border: 0.5px solid var(--accent); opacity: 0.85;
+    }
 
-  /* LIGHT MODE */
-  body.light {
-    background: #f1f5f9;
-    color: #0f172a;
-  }
+    /* SECTION CARDS */
+    .section-card {
+      background: var(--surface); border-radius: 14px;
+      border: 0.5px solid var(--border); padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .section-title {
+      font-size: 12px; font-weight: 500; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--muted); margin-bottom: 1.25rem;
+    }
 
-  h1 { color: #38bdf8; }
-  h2 { color: #94a3b8; }
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+    .project-card {
+      background: var(--card); border: 0.5px solid var(--border);
+      border-radius: 10px; padding: 1.1rem 1.25rem;
+      display: flex; flex-direction: column; gap: 8px;
+      transition: border-color 0.2s;
+    }
+    .project-card:hover { border-color: var(--accent); }
+    .project-icon { font-size: 20px; }
+    .project-name { font-size: 15px; font-weight: 600; color: var(--text); }
+    .project-desc { font-size: 13px; color: var(--muted); line-height: 1.5; flex: 1; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .project-tag {
+      font-size: 11px; background: var(--tag-bg); color: var(--tag-color);
+      padding: 3px 8px; border-radius: 10px;
+    }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 13px; color: var(--accent); text-decoration: none;
+      font-weight: 500; margin-top: 4px;
+    }
+    .project-link:hover { text-decoration: underline; }
 
-  section {
-    margin: 40px auto;
-    padding: 25px;
-    width: 60%;
-    border-radius: 12px;
-    transition: background 0.3s;
-  }
+    /* SKILLS */
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-pill {
+      background: var(--card); border: 0.5px solid var(--border);
+      border-radius: 8px; padding: 7px 14px;
+      font-size: 13px; color: var(--text); font-weight: 400;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .skill-pill:hover { border-color: var(--accent); color: var(--accent); }
 
-  body.dark section {
-    background: #1e293b;
-  }
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+    }
+    .contact-item {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--card); border: 0.5px solid var(--border);
+      border-radius: 10px; padding: 12px 14px;
+    }
+    .contact-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: var(--tag-bg); display: flex; align-items: center;
+      justify-content: center; font-size: 15px; flex-shrink: 0;
+    }
+    .contact-label { font-size: 11px; color: var(--muted); margin-bottom: 2px; }
+    .contact-value { font-size: 13px; color: var(--text); font-weight: 500; word-break: break-all; }
+    .contact-value a { color: var(--accent); text-decoration: none; }
+    .contact-value a:hover { text-decoration: underline; }
 
-  body.light section {
-    background: #ffffff;
-  }
+    /* FOOTER */
+    .footer {
+      text-align: center; font-size: 12px;
+      color: var(--muted); padding-top: 1rem;
+    }
 
-  .project {
-    margin: 20px 0;
-    padding: 15px;
-    border-radius: 8px;
-  }
-
-  body.dark .project {
-    background: #0f172a;
-  }
-
-  body.light .project {
-    background: #e2e8f0;
-  }
-
-  a {
-    color: #38bdf8;
-    text-decoration: none;
-    font-weight: bold;
-  }
-
-  .toggle-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-
-  body.dark .toggle-btn {
-    background: #38bdf8;
-    color: black;
-  }
-
-  body.light .toggle-btn {
-    background: #0f172a;
-    color: white;
-  }
+    @media (max-width: 520px) {
+      .hero { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .wrapper { padding: 1rem 1rem 2rem; }
+      .section-card { padding: 1.25rem 1.25rem; }
+    }
   </style>
-
 </head>
-
 <body>
-  <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
 
-  <section>
-    <h1>Kartik Singh</h1>
-    <h2>DevOps Engineer</h2>
-    <p>I build scalable, secure cloud infrastructure using AWS, Kubernetes & CI/CD</p>
-  </section>
+  <button class="toggle" onclick="toggleTheme()" id="themeBtn">
+    <span id="themeIcon">☀️</span>
+    <span id="themeLabel">Light mode</span>
+  </button>
 
-  <section>
-  <h3>🚀 Projects</h3>
+  <div class="wrapper">
 
-  <div class="project">
-    <b>ShivaShell</b><br>
-    Linux automation toolkit <br>
-    <a href="https://github.com/KartikSingh970/ShivaShell" target="_blank">View Project</a>
+    <!-- HERO -->
+    <div class="hero">
+      <div class="avatar">KS</div>
+      <div class="hero-text">
+        <h1>Kartik Singh</h1>
+        <h2>DevOps Engineer</h2>
+        <p>Building scalable, secure cloud infrastructure using AWS, Kubernetes &amp; CI/CD pipelines</p>
+        <div class="badge-row">
+          <span class="badge">AWS</span>
+          <span class="badge">Kubernetes</span>
+          <span class="badge">CI/CD</span>
+          <span class="badge">Open to work</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="section-card">
+      <div class="section-title">Projects</div>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-icon">🐚</div>
+          <div class="project-name">ShivaShell</div>
+          <div class="project-desc">Linux automation toolkit for streamlined system management and scripting workflows</div>
+          <div class="project-tags">
+            <span class="project-tag">Bash</span>
+            <span class="project-tag">Linux</span>
+            <span class="project-tag">Automation</span>
+          </div>
+          <a class="project-link" href="https://github.com/KartikSingh970/ShivaShell" target="_blank" rel="noopener">View on GitHub ↗</a>
+        </div>
+        <div class="project-card">
+          <div class="project-icon">🚕</div>
+          <div class="project-name">CabOps</div>
+          <div class="project-desc">Full EKS-based CI/CD pipeline with Docker, ECR, and Terraform — DevSecOps end-to-end</div>
+          <div class="project-tags">
+            <span class="project-tag">Terraform</span>
+            <span class="project-tag">EKS</span>
+            <span class="project-tag">Docker</span>
+            <span class="project-tag">ECR</span>
+          </div>
+          <a class="project-link" href="https://github.com/KartikSingh970/CabOps-DevSecOps-project" target="_blank" rel="noopener">View on GitHub ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="section-card">
+      <div class="section-title">Skills</div>
+      <div class="skills-grid">
+        <span class="skill-pill">AWS</span>
+        <span class="skill-pill">Docker</span>
+        <span class="skill-pill">Kubernetes</span>
+        <span class="skill-pill">Terraform</span>
+        <span class="skill-pill">Jenkins</span>
+        <span class="skill-pill">GitHub Actions</span>
+        <span class="skill-pill">Linux</span>
+        <span class="skill-pill">Bash</span>
+        <span class="skill-pill">CI/CD</span>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="section-card">
+      <div class="section-title">Contact</div>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-value">7399936655</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">
+              <a href="mailto:kartik970singh@gmail.com">kartik970singh@gmail.com</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">💻</div>
+          <div>
+            <div class="contact-label">GitHub</div>
+            <div class="contact-value">
+              <a href="https://github.com/KartikSingh970" target="_blank" rel="noopener">KartikSingh970</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">© 2025 Kartik Singh · Built with HTML &amp; CSS</div>
+
   </div>
-
-  <div class="project">
-    <b>CabOps</b><br>
-    EKS CI/CD pipeline with Docker, ECR, Terraform <br>
-    <a href="https://github.com/KartikSingh970/CabOps-DevSecOps-project" target="_blank">View Project</a>
-  </div>
-
-  </section>
-
-  <section>
-    <h3>🛠 Skills</h3>
-    <p>AWS | Docker | Kubernetes | Terraform | Jenkins | GitHub Actions</p>
-  </section>
-
-  <section>
-    <h3>📬 Contact: 7399936655</h3>
-    <p>Email: kartik970singh@gmail.com</p>
-    <p>GitHub: https://github.com/KartikSingh970</p>
-  </section>
 
   <script>
-    // default theme
-    document.body.classList.add("dark");
-
+    let dark = true;
     function toggleTheme() {
-      if (document.body.classList.contains("dark")) {
-        document.body.classList.remove("dark");
-        document.body.classList.add("light");
-      } else {
-        document.body.classList.remove("light");
-        document.body.classList.add("dark");
-      }
+      dark = !dark;
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      document.getElementById('themeIcon').textContent = dark ? '☀️' : '🌙';
+      document.getElementById('themeLabel').textContent = dark ? 'Light mode' : 'Dark mode';
     }
   </script>
+
 </body>
 </html>
+
