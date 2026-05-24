@@ -43,8 +43,26 @@ const observer = new IntersectionObserver(
 document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
 
-document.querySelectorAll('.project-card, .contact-item, .badge, .skill-pill, .project-link')
-  .forEach(el => el.style.touchAction = 'manipulation');
+const touchTargets = document.querySelectorAll(
+  '.project-card, .contact-item, .badge, .skill-pill, .project-link'
+);
+
+touchTargets.forEach(el => {
+  el.style.touchAction = 'manipulation';
+
+  el.addEventListener('touchstart', () => {
+    el.classList.add('touch-active');
+  }, { passive: true });
+
+  el.addEventListener('touchend', () => {
+    
+    setTimeout(() => el.classList.remove('touch-active'), 220);
+  }, { passive: true });
+
+  el.addEventListener('touchcancel', () => {
+    el.classList.remove('touch-active');
+  }, { passive: true });
+});
 
 
 const homeBtn = document.querySelector('.dock-btn[href="#top"]');
